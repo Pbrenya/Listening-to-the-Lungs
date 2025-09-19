@@ -1,0 +1,88 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.so
+*.egg
+*.egg-info/
+*.log
+
+# =====================
+# Jupyter / Colab
+# =====================
+.ipynb_checkpoints/
+*.ipynb_convert/
+*.nbconvert.ipynb
+
+# =====================
+# Virtual Env
+# =====================
+.env
+.venv
+env/
+venv/
+ENV/
+*.conda
+*.virtualenv
+
+# =====================
+# Data (raw + processed)
+# =====================
+# We track .wav files with Git LFS, so they should NOT be ignored.
+# But all processed/intermediate data should be ignored.
+data/processed/
+data/interim/
+data/external/
+
+# =====================
+# DVC
+# =====================
+.dvc/cache/
+.dvc/tmp/
+.dvc/lock
+
+# =====================
+# Models / Checkpoints
+# =====================
+checkpoints/
+models/
+*.h5
+*.hdf5
+*.pth
+*.pt
+*.ckpt
+*.keras
+*.tflite
+*.onnx
+
+# =====================
+# Training outputs
+# =====================
+logs/
+wandb/
+lightning_logs/
+mlruns/
+tensorboard/
+runs/
+
+# =====================
+# Build / Dist
+# =====================
+dist/
+build/
+.eggs/
+*.tar.gz
+*.whl
+
+# =====================
+# System / Misc
+# =====================
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store

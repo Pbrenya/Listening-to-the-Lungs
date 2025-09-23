@@ -1,6 +1,10 @@
 import os
 import sys
-from huggingface_hub import HfApi, create_repo, whoami, SpaceSdk
+from huggingface_hub import HfApi, create_repo, whoami
+try:
+    from huggingface_hub import SpaceSdk  # type: ignore
+except Exception:
+    SpaceSdk = None  # older huggingface_hub
 
 
 def main():
@@ -18,8 +22,19 @@ def main():
         print("Authentication failed:", e)
         sys.exit(1)
 
-    # Ensure repo exists as a Space (sdk=STREAMLIT)
-    create_repo(space_id, repo_type="space", exist_ok=True, space_sdk=SpaceSdk.STREAMLIT)
+    # Ensure repo exists as a Space; try to set SDK if available
+    try:
+        if SpaceSdk is not None:
+            create_repo(space_id, repo_type="space", exist_ok=True, space_sdk=SpaceSdk.STREAMLIT)
+        else:
+            # Fallback for older hubs: attempt with string; if it fails, create without sdk
+            try:
+                create_repo(space_id, repo_type="space", exist_ok=True, space_sdk="streamlit")
+            except Exception:
+                create_repo(space_id, repo_type="space", exist_ok=True)
+    except Exception as e:
+        print("Warning: could not set Space SDK to streamlit (continuing):", e)
+        create_repo(space_id, repo_type="space", exist_ok=True)
 
     # Upload files needed for the app: app.py, requirements.txt, src/
     files_to_upload = [

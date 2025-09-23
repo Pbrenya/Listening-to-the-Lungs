@@ -1,0 +1,52 @@
+name: Seed project issues
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  create_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create labels and issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: 'documentation', color: '0075ca' },
+              { name: 'enhancement', color: 'a2eeef' },
+              { name: 'ci-cd', color: 'd4c5f9' },
+              { name: 'app', color: '0e8a16' },
+              { name: 'good first issue', color: '7057ff' }
+            ];
+
+            // ensure labels
+            for (const l of labels) {
+              try {
+                await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name: l.name });
+              } catch (e) {
+                await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name: l.name, color: l.color });
+              }
+            }
+
+            const issues = [
+              { title: 'Improve README with Quickstart and Demo', labels: ['documentation'], body: `Add Quickstart: install, run tests, launch Streamlit, example inference. Link dataset and Space. Acceptance: README shows install, pytest, streamlit run app.py, sample WAV inference.` },
+              { title: 'Add Project Architecture diagram', labels: ['documentation'], body: `Diagram data flow: audio → features → model → XAI → UI. Place under README Architecture.` },
+              { title: 'Document Dataset Setup and citation', labels: ['documentation'], body: `Update data/DATASET.md with folder layout, placement steps, citations/EULA notes. Ensure splits saved to work_tf/.` },
+              { title: 'Provide example audio samples or fetch script', labels: ['enhancement','app'], body: `Add 2–3 small WAVs (public domain) under data/samples/ or script to fetch. Wire to app sidebar "Use example".` },
+              { title: 'Streamlit App usage guide with screenshots', labels: ['documentation','app'], body: `Create docs/app_usage.md: model path, upload, visualizations, XAI tabs, troubleshooting. Link from README.` },
+              { title: 'Reproducible training guide', labels: ['documentation'], body: `Create docs/training.md: build splits, train, evaluate, export best_model.keras, expected artifacts in work_tf/.` },
+              { title: 'CI matrix, caching, and lint', labels: ['ci-cd'], body: `Expand CI to Python 3.9/3.10/3.11, enable pip cache, run flake8/black check, run pytest -q.` },
+              { title: 'Harden HF Spaces CD workflow', labels: ['ci-cd'], body: `Validate HF_SPACE_ID format, clearer error messages, optional pre-check for Space existence, upload summary outputs.` },
+              { title: 'Add pre-commit hooks (black, flake8, nbstripout)', labels: ['enhancement'], body: `Configure .pre-commit-config.yaml and docs for installation; enforce in CI.` },
+              { title: 'Add type hints and docstrings across src/', labels: ['enhancement'], body: `Annotate public functions in data.py, features.py, model.py, xai.py; brief docstrings; optional mypy pass.` },
+              { title: 'Improve error handling in app.py', labels: ['app','enhancement'], body: `Gracefully handle bad audio, missing model, heavy XAI timeouts; user-friendly messages; no crashes.` },
+              { title: 'Centralize config (CFG) and reduce duplication', labels: ['enhancement'], body: `Align CFG in src and notebooks; single source of truth; minimal overrides for notebook experiments.` },
+              { title: 'Model export & versioning metadata', labels: ['enhancement'], body: `Save model with labels.json and config.json; include version/commit; app reads metadata if present.` },
+              { title: 'Performance: light mode & XAI opt-in', labels: ['app','enhancement'], body: `Add light inference mode default; IG/SHAP behind toggle; document impact.` },
+              { title: 'Security/Privacy documentation', labels: ['documentation'], body: `Document how uploaded audio is used; disable analytics; add guidance for sensitive data.` }
+            ];
+
+            for (const i of issues) {
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title: i.title, body: i.body, labels: i.labels });
+            }
+

@@ -1,18 +1,20 @@
-name: CD - Deploy Streamlit to Hugging Face Spaces
+name: Deploy Streamlit to Hugging Face Spaces
 
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'app.py'
-      - 'requirements.txt'
-      - 'src/**'
-      - '.github/workflows/cd_streamlit.yml'
   workflow_dispatch: {}
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -1,6 +1,6 @@
 import os
 import sys
-from huggingface_hub import HfApi, create_repo, whoami
+from huggingface_hub import HfApi, create_repo, whoami, SpaceSdk
 
 
 def main():
@@ -18,8 +18,8 @@ def main():
         print("Authentication failed:", e)
         sys.exit(1)
 
-    # Ensure repo exists as a Space (sdk=streamlit)
-    create_repo(space_id, repo_type="space", exist_ok=True, space_sdk="streamlit")
+    # Ensure repo exists as a Space (sdk=STREAMLIT)
+    create_repo(space_id, repo_type="space", exist_ok=True, space_sdk=SpaceSdk.STREAMLIT)
 
     # Upload files needed for the app: app.py, requirements.txt, src/
     files_to_upload = [

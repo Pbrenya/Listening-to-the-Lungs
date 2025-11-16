@@ -12,7 +12,16 @@ Explainability is achieved using **Grad-CAM, Integrated Gradients, and SHAP** fo
 - Healthy
 - Pneumonia
 
+## Preprocessing Pipeline
+
+<img width="961" height="553" alt="preprocessing pipeline" src="https://github.com/user-attachments/assets/db98f776-5449-4096-8060-15c25e596780" />
+
+
 ## 🏗️ Model Architecture
+
+<img width="908" height="555" alt="model architecture" src="https://github.com/user-attachments/assets/c7537eca-e998-4d59-8f88-35b364203c5e" />
+
+
 The model consists of two parallel branches:
 
 1. **Mel-Spectrogram Branch**

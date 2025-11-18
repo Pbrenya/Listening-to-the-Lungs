@@ -1,5 +1,7 @@
 # Lung Disease Detection from Respiratory Sounds
 
+<img width="775" height="575" alt="methdology flow" src="https://github.com/user-attachments/assets/903e00f5-cb39-425e-8daf-f004c1a5c463" />
+
 ## 📌 Overview
 This repository implements a **hybrid deep learning framework** for automatic **multi-class lung disease detection** from respiratory sounds.  
 The model integrates **deep audio features (mel-spectrogram + CNN–BiLSTM–Attention)** with **handcrafted acoustic features** (MFCCs, chroma, ZCR, spectral centroid, bandwidth).  

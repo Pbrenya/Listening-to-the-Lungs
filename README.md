@@ -114,11 +114,15 @@ pip install numpy scipy pandas matplotlib seaborn librosa soundfile scikit-learn
 - Deploy as **web app** with real-time inference
 - Use **transformer-based encoders** (AST, Wav2Vec2) for stronger embeddings
 
-## 👨‍💻 Author
-- **S M Asiful Islam Saky**  
-Bachelor of Computer Science (Specialization: Data Science)  
-Researcher in AI/ML/DL  
-Skills: Python, TensorFlow, NLP, Data Science, Explainable AI
 
-## 📜 License
-This repository is licensed under the MIT License.
+## Citation
+
+      @misc{saky2025explainablemultimodaldeeplearning,
+            title={Explainable Multi-Modal Deep Learning for Automatic Detection of Lung Diseases from Respiratory Audio Signals}, 
+            author={S M Asiful Islam Saky and Md Rashidul Islam and Md Saiful Arefin and Shahaba Alam},
+            year={2025},
+            eprint={2512.00563},
+            archivePrefix={arXiv},
+            primaryClass={cs.SD},
+            url={https://arxiv.org/abs/2512.00563}, 
+      }

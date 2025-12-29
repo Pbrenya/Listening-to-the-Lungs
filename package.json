@@ -1,0 +1,31 @@
+{
+  "name": "listening-to-the-lungs",
+  "version": "1.0.0",
+  "description": "Hybrid deep learning framework for automatic multi-class lung disease detection from respiratory sounds",
+  "main": "js/run.js",
+  "type": "module",
+  "scripts": {
+    "train": "node js/run.js train",
+    "infer": "node js/run.js infer",
+    "xai": "node js/run.js xai",
+    "test": "node js/examples/inference.js"
+  },
+  "keywords": [
+    "lung-disease",
+    "audio-classification",
+    "deep-learning",
+    "tensorflow",
+    "explainable-ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^4.15.0",
+    "wavefile": "^11.0.0",
+    "meyda": "^5.6.0",
+    "commander": "^11.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

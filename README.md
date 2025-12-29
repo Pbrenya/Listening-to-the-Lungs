@@ -9,7 +9,19 @@ Explainability is achieved using **Grad-CAM, Integrated Gradients, and SHAP** fo
 
 ### 🚀 Available Implementations
 - **Python Version** (Original): Full-featured implementation with TensorFlow/Keras
-- **JavaScript Version** (Node.js): TensorFlow.js implementation for server/edge deployment - see **[JAVASCRIPT_GUIDE.md](JAVASCRIPT_GUIDE.md)**
+- **JavaScript Version** (Node.js): TensorFlow.js implementation for server/edge deployment - see **[JAVASCRIPT_GUIDE.md](JAVASCRIPT_GUIDE.md)** and **[CONVERSION_SUMMARY.md](CONVERSION_SUMMARY.md)**
+
+#### Quick Start - JavaScript
+```bash
+# Install dependencies
+npm install
+
+# Run inference on audio
+node js/run.js infer --wav path/to/audio.wav
+
+# View all options
+node js/run.js --help
+```
 
 ### Target Diseases
 - Bronchial

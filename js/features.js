@@ -2,8 +2,17 @@
  * Audio feature extraction utilities
  */
 
-import * as tf from '@tensorflow/tfjs-node';
-import { WaveFile } from 'wavefile';
+// Try to use tfjs-node for better performance, fall back to pure tfjs
+let tf;
+try {
+  tf = await import('@tensorflow/tfjs-node');
+} catch {
+  tf = await import('@tensorflow/tfjs');
+}
+
+import wavefileModule from 'wavefile';
+const { WaveFile } = wavefileModule;
+
 import Meyda from 'meyda';
 import fs from 'fs';
 
@@ -151,3 +160,6 @@ export function extractMfcc(y, sr, nMfcc = 20) {
   
   return mfcc || new Array(nMfcc).fill(0);
 }
+
+// Export tf for use by other modules
+export { tf };

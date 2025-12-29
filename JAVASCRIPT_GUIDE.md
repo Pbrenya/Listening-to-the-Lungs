@@ -64,8 +64,13 @@ npm install
 
 This will install the following key dependencies:
 
-- `@tensorflow/tfjs-node` - TensorFlow.js for Node.js with native bindings
+- `@tensorflow/tfjs` - TensorFlow.js core library
+- `@tensorflow/tfjs-node` (optional) - TensorFlow.js with native bindings for better performance
 - `wavefile` - WAV file reading and manipulation
+- `meyda` - Audio feature extraction library
+- `commander` - CLI argument parsing
+
+**Note**: The installation will attempt to install `@tensorflow/tfjs-node` as an optional dependency. If it fails (common in some environments), the code will automatically fall back to pure `@tensorflow/tfjs`, which is slower but works everywhere.
 - `meyda` - Audio feature extraction library
 - `commander` - CLI argument parsing
 

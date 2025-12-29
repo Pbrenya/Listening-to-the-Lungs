@@ -2,7 +2,13 @@
  * Hybrid CNN-BiLSTM-Attention model for lung disease classification
  */
 
-import * as tf from '@tensorflow/tfjs-node';
+// Try to use tfjs-node for better performance, fall back to pure tfjs
+let tf;
+try {
+  tf = await import('@tensorflow/tfjs-node');
+} catch {
+  tf = await import('@tensorflow/tfjs');
+}
 
 /**
  * Custom Additive Attention Layer
@@ -117,10 +123,12 @@ export function buildModel(handDim, numClasses, lr = 3e-4) {
   x = convBlock(x, 128);
   
   // Identity layer for Grad-CAM (last conv output)
-  x = tf.layers.lambda({
-    func: (t) => t,
+  // Note: Lambda is not available in pure tfjs, using activation with 'linear'
+  const convTailIdentity = tf.layers.activation({ 
+    activation: 'linear',
     name: 'conv_tail_identity'
   }).apply(x);
+  x = convTailIdentity;
   
   // Reshape for LSTM: permute to (batch, time, channels)
   // Current shape: (batch, mels', time', channels)
@@ -212,4 +220,4 @@ export async function trainModel(model, trainData, valData, cfg, workDir = 'work
   return history;
 }
 
-export { AdditiveAttention };
+export { AdditiveAttention, tf };

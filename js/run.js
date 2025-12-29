@@ -8,7 +8,16 @@
  */
 
 import { Command } from 'commander';
-import * as tf from '@tensorflow/tfjs-node';
+
+// Try to use tfjs-node for better performance, fall back to pure tfjs
+let tf;
+try {
+  tf = await import('@tensorflow/tfjs-node');
+} catch {
+  console.log('Note: Using pure TensorFlow.js (tfjs-node not available). For better performance, install @tensorflow/tfjs-node.');
+  tf = await import('@tensorflow/tfjs');
+}
+
 import { buildModel } from './model.js';
 import { gradCAM } from './xai.js';
 import { loadWav, padOrTrim, extractMel, extractHandcrafted } from './features.js';

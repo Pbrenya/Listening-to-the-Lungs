@@ -2,7 +2,13 @@
  * Explainable AI (XAI) methods: Grad-CAM, Integrated Gradients
  */
 
-import * as tf from '@tensorflow/tfjs-node';
+// Try to use tfjs-node for better performance, fall back to pure tfjs
+let tf;
+try {
+  tf = await import('@tensorflow/tfjs-node');
+} catch {
+  tf = await import('@tensorflow/tfjs');
+}
 
 /**
  * Compute Grad-CAM for the model

@@ -5,7 +5,15 @@
  * Usage: node js/examples/inference.js path/to/file.wav
  */
 
-import * as tf from '@tensorflow/tfjs-node';
+// Try to use tfjs-node for better performance, fall back to pure tfjs
+let tf;
+try {
+  tf = await import('@tensorflow/tfjs-node');
+} catch {
+  console.log('Note: Using pure TensorFlow.js. For better performance, install @tensorflow/tfjs-node.');
+  tf = await import('@tensorflow/tfjs');
+}
+
 import { loadWav, padOrTrim, extractMel, extractHandcrafted } from '../features.js';
 import { CFG } from '../data.js';
 import path from 'path';

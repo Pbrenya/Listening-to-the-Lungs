@@ -7,6 +7,22 @@ This repository implements a **hybrid deep learning framework** for automatic **
 The model integrates **deep audio features (mel-spectrogram + CNN–BiLSTM–Attention)** with **handcrafted acoustic features** (MFCCs, chroma, ZCR, spectral centroid, bandwidth).  
 Explainability is achieved using **Grad-CAM, Integrated Gradients, and SHAP** for different feature branches.
 
+### 🚀 Available Implementations
+- **Python Version** (Original): Full-featured implementation with TensorFlow/Keras
+- **JavaScript Version** (Node.js): TensorFlow.js implementation for server/edge deployment - see **[JAVASCRIPT_GUIDE.md](JAVASCRIPT_GUIDE.md)** and **[CONVERSION_SUMMARY.md](CONVERSION_SUMMARY.md)**
+
+#### Quick Start - JavaScript
+```bash
+# Install dependencies
+npm install
+
+# Run inference on audio
+node js/run.js infer --wav path/to/audio.wav
+
+# View all options
+node js/run.js --help
+```
+
 ### Target Diseases
 - Bronchial
 - Asthma
@@ -87,21 +103,47 @@ The model consists of two parallel branches:
 - **SHAP** plots show feature importance of handcrafted features
 
 ## 📦 Installation
+
+### Python Version
 ```bash
 # Install dependencies (if on Colab/Kaggle, adjust as needed)
 pip install numpy scipy pandas matplotlib seaborn librosa soundfile scikit-learn tensorflow==2.15.0 shap
 ```
 
+### JavaScript Version (Node.js)
+```bash
+# Install Node.js dependencies
+npm install
+```
+
+For detailed JavaScript installation and usage, see **[JAVASCRIPT_GUIDE.md](JAVASCRIPT_GUIDE.md)**
+
 ## ▶️ Usage
+
+### Python Usage
 1. Clone repo:
    ```bash
-   git clone https://github.com/yourusername/lung-disease-detection.git
-   cd lung-disease-detection
+   git clone https://github.com/Pbrenya/Listening-to-the-Lungs.git
+   cd Listening-to-the-Lungs
    ```
 2. Prepare dataset under `data_dir` path inside `CFG` class
 3. Run notebook or training script
 4. Evaluate using built-in metrics
 5. Visualize XAI results
+
+### JavaScript Usage
+```bash
+# Run inference on audio file
+node js/run.js infer --wav path/to/audio.wav
+
+# Run training demo
+npm run train
+
+# Run XAI demo
+npm run xai
+```
+
+See **[JAVASCRIPT_GUIDE.md](JAVASCRIPT_GUIDE.md)** for comprehensive documentation, examples, and case studies.
 
 ## 📈 Visualization
 - **Training Curves**: Accuracy & loss over epochs
